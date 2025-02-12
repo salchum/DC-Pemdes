@@ -1,0 +1,16 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-ssh-proxy
+    volumes:
+      - /srv/dockerdata/nginx-ssh-proxy/nginx.conf:/etc/nginx/nginx.conf:ro  # Bind config file
+    ports:
+      - "2200:2200"  # Expose SSH proxy on port 2200
+      - "2201:2201"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
